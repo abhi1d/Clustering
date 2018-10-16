@@ -1,9 +1,7 @@
+import java.util.List;
 import java.util.Random;
 
 public class Population_Init {
-
-    // no of vector
-    private int no_of_vector = 569;
 
     // setting the size of population
     public static int population_size = 10;
@@ -12,19 +10,31 @@ public class Population_Init {
     public  static int no_of_cluster = 3;
 
     // vector dimension
-    private String vector_dimension[][] = new String[569][32];
+    public List<List<String>> vector_dimension;
 
     // population vector
-    private int population_vector[][] = new int[population_size][no_of_cluster];
+    public  int population_vector[][] = new int[population_size][no_of_cluster];
+
+    // default constructor
+    public Population_Init()
+    {
+
+    }
 
     // dimension setter constructor
-    public Population_Init(String vector_dimension[][])
+    public Population_Init(List<List<String>> vector_dimension)
     {
         this.vector_dimension = vector_dimension;
     }
 
+
+
+
     public int[][] getPopulation()
     {
+        // no of vector
+        int no_of_vector = vector_dimension.size();
+
         Random rand = new Random();
 
 

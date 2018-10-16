@@ -1,27 +1,30 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Access_File {
-    public String[] getFile()
+    public List<String> getFile()
     {
-        String data[] = new String[570];
-        int i = 0;
+        List<String> data_point_list = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader("wdbc_data.txt"))) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader("iris.data.txt"))) {
             String line = null;
             while ((line = br.readLine()) != null) {
 
-                data[i] = line;
-                i++;
+                data_point_list.add(line);
+
             }
+
 
 
         } catch (Exception e)
         {
-            System.out.println("hhhh" + e);
+            System.out.println("error" + e);
 
         }
-        return data;
+        return data_point_list;
 
     }
 }
