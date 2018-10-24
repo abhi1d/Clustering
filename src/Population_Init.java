@@ -28,8 +28,6 @@ public class Population_Init {
     }
 
 
-
-
     public int[][] getPopulation()
     {
         // no of vector

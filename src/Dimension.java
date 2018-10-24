@@ -35,10 +35,10 @@ public class Dimension {
         }
 
 
-        System.out.println("Dimension Vector :");
+        System.out.print("**********************************************************************************************");
+        System.out.println("\n\tDimension Vector : X ");
 
-
-        for(int i = 0;i<dimension_vector.size();i++)
+        for(int i = 0;i<dimension_vector.size()-1;i++)
         {
             System.out.print("[");
 
@@ -48,6 +48,7 @@ public class Dimension {
             }
             System.out.println("]");
         }
+        System.out.print("**********************************************************************************************");
         return dimension_vector;
     }
 }
