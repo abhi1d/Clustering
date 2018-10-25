@@ -48,6 +48,28 @@ public class Clustering {
       Membership_Computation obj_membership_computation = new Membership_Computation(data_points, population_vector, population_size, no_of_cluster, dimension_vector);
       double[][][] membership_matrix = obj_membership_computation.getMembershipMatrix();
 
+      // if mistakely something becomes Nan number then converting into normal default value = 1.0;
+      for(int i = 0 ; i < membership_matrix.length ; i++)
+        {
+
+            for(int j = 0 ; j < membership_matrix[i].length ; j++)
+            {
+
+
+                for(int k = 0 ; k < membership_matrix[i][j].length ; k++)
+                {
+                    if(Double.isNaN(membership_matrix[i][j][k]))
+                    {
+                        membership_matrix[i][j][k] = 1.0;
+                    }
+
+                }
+
+
+
+            }
+        }
+
       // Writing membership matrix into file named membership_output.txt.
         try{
              FileWriter fw = new FileWriter("membership_output.txt");
@@ -77,8 +99,38 @@ public class Clustering {
         }
     //************************************************************************************************************************
     // updation of cluster center
+    UpdateCenter obj_updateCenter = new UpdateCenter(membership_matrix, population_size, no_of_cluster, data_points);
+    double [][][] updated_center =  obj_updateCenter.centerUpdate();
+        // Writing membership matrix into file named membership_output.txt.
+        try{
+            FileWriter fw = new FileWriter("membership_output.txt", true);
+
+            fw.append("\n Now updated center data is updated.\n");
+
+            for(int i = 0 ; i < updated_center.length ; i++)
+            {
+                fw.append( "[");
+                for(int j = 0 ; j < updated_center[i].length ; j++)
+                {
+
+                    fw.append("[");
+                    for(int k = 0 ; k < updated_center[i][j].length ; k++)
+                    {
+
+                        fw.write( updated_center[i][j][k] + " ");
+                    }
+                    fw.append("],");
+                    fw.append("\t");
+
+                }
+                fw.append("]\n");
+            }
 
 
+            fw.close();
+        }catch (Exception e){
+            System.out.print("File Writing error " + e);
+        }
 
 
     }

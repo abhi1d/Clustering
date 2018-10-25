@@ -12,6 +12,8 @@ public class Membership_Computation {
     private double[][] data_points;
     List<List<String>> dimension_vector;
 
+    public Membership_Computation(){}
+
    // setter contructor
     public Membership_Computation( double[][] data_points, int population_vector[][],  int population_size, int no_of_cluster, List<List<String>> dimension_vector)
     {
@@ -49,9 +51,15 @@ public class Membership_Computation {
                               double []Diff_b = DifferenceMatrix(data_points[i], dimension_vector.get(population_vector[p][k]));
 
                               double b = getSquareVale(Diff_b);
-
-                              sum_b = sum_b + (1/b);
-
+                              double b_temp = 0.0;
+                              try{
+                                  b_temp =  (1/b);
+                              }catch (Exception e){
+                                  b_temp = 1.0;
+                                  System.out.print("zero division not allowed");
+                              }
+                             sum_b = sum_b + b_temp;
+                            /*
                              System.out.print("[  (" + p + "x" + k + ") ");
                              for(int g  = 0 ; g < Diff_b.length ; g++)
                              {
@@ -59,19 +67,24 @@ public class Membership_Computation {
                              }
                              System.out.print( "\t");
                              System.out.println("]");
-
+                            */
 
                          }
 
-                         membership_matrix[p][i][j] = 1 / (a * sum_b);
+                         try{
+                             membership_matrix[p][i][j] = (1.0 / (a * sum_b));
+                         } catch (Exception e){
+                             membership_matrix[p][i][j] = 1.0;
+                         }
 
-                         System.out.print("[  (" + i + "x" + j + ") ");
+
+                        /* System.out.print("[  (" + i + "x" + j + ") ");
                          for(int g  = 0 ; g < Diff_a.length ; g++)
                          {
                              System.out.print(Diff_a[g]);
                          }
                          System.out.print( "\t");
-                         System.out.println("]");
+                         System.out.println("]"); */
 
                      }
                  }
